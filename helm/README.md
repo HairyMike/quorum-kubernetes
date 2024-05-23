@@ -102,6 +102,8 @@ helm install quorum-kubeshark-ingress ingress-nginx/ingress-nginx \
     --set controller.service.externalTrafficPolicy=Local
   ```
 
+kubectl apply -f ../ingress/ingress-rules-kubeshark.yml
+
 ### _Spin up prometheus-stack for metrics: (Optional but recommended)_
 
 **NOTE:** this uses charts from prometheus-community - please configure this as per your requirements and policies

@@ -144,7 +144,7 @@ node:
 image:
   besu:
     repository: hyperledger/besu
-    tag: 24.3
+    tag: 24.5.1
     pullPolicy: IfNotPresent
   tessera:
     repository: quorumengineering/tessera

@@ -9,12 +9,11 @@ metadata:
     kubeshark-created-by: kubeshark
     kubeshark-managed-by: kubeshark
   name: kubeshark-ingress
-  namespace: 'kubeshark'
+  namespace: 'quorum'
 spec:
   ingressClassName: kubeshark-ingress-class
   rules:
-    - host: 'kubeshark.mycompany.com'
-      http:
+    - http:
         paths:
           - backend:
               service:
