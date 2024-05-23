@@ -81,6 +81,27 @@ Alternatively configure the kibana ingress settings in the [values.yml](./values
 Once you have kibana open, create a `filebeat` index pattern and logs should be available. Please configure this as
 per your requirements and policies
 
+### _Spin up kubeshark for network analysis: (Optional but recommended)_
+
+```bash
+helm repo add kubeshark https://helm.kubeshark.co
+helm repo upgrade
+helm install kubeshark kubeshark/kubeshark
+```
+
+Additionally, you will need to deploy a separate ingress which will serve kubeshark
+```bash
+helm install quorum-kubeshark-ingress ingress-nginx/ingress-nginx \
+    --namespace quorum \
+    --set controller.ingressClassResource.name="kubeshark-nginx" \
+    --set controller.ingressClassResource.controllerValue="k8s.io/kubeshark-ingress-nginx" \
+    --set controller.replicaCount=1 \
+    --set controller.nodeSelector."kubernetes\.io/os"=linux \
+    --set defaultBackend.nodeSelector."kubernetes\.io/os"=linux \
+    --set controller.admissionWebhooks.patch.nodeSelector."kubernetes\.io/os"=linux \
+    --set controller.service.externalTrafficPolicy=Local
+  ```
+
 ### _Spin up prometheus-stack for metrics: (Optional but recommended)_
 
 **NOTE:** this uses charts from prometheus-community - please configure this as per your requirements and policies
